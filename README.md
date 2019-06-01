@@ -3,27 +3,13 @@
 ## Project setup
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+a draggable demo based on Vue.js.
 
-### Run your tests
-```
-npm run test
-```
+directly import the draggable.vue then component it.
 
-### Lints and fixes files
-```
-npm run lint
-```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
