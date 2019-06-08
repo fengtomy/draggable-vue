@@ -1,9 +1,9 @@
 <template>
     <div id="app">
-        <draggable :list="dataStore">
-      <span slot="draggableItem" slot-scope="item" >
-        {{ item.label.text }}
-      </span>
+        <draggable :list="dataStore" :insert-type="type">
+            <span slot="draggableItem" slot-scope="item" >
+                {{ item.label.text }}
+            </span>
         </draggable>
     </div>
 </template>
@@ -42,7 +42,8 @@
                     { text: "cat", id: 22 },
                     { text: "banana", id: 23 },
                     { text: "pear", id: 24 }
-                ]
+                ],
+                type: "exchange"
             };
         }
     }

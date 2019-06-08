@@ -22,6 +22,12 @@
             list: {
                 type: Array,
                 required: true
+            },
+            // insert mode: insert after drop item
+            // exchange mode: exchange the positions of drag and drop items
+            insertType: {
+                type: String,
+                default: "insert"
             }
         },
         data() {
@@ -49,7 +55,7 @@
                 return this.fixDropItem(node.parentNode);
             },
             drop($e) {
-                const list = this.list;
+                const { list, insertType } = this;
                 const id = this.fixDropItem($e.target);
                 const item = list.filter(label => label.id + "" === id)[0];
                 if (item) {
@@ -59,8 +65,19 @@
                     const dragIndex = list.indexOf(this.dragItem),
                         dropIndex = list.indexOf(this.dropItem);
                     if (~dragIndex && ~dropIndex) {
-                        list.splice(dropIndex + 1, 0, this.dragItem);
-                        list.splice(dragIndex, 1);
+                        if (insertType === "insert") {
+                            if (dropIndex > dragIndex) {
+                                list.splice(dropIndex + 1, 0, this.dragItem);
+                                list.splice(dragIndex, 1);
+                            } else {
+                                list.splice(dragIndex, 1);
+                                list.splice(dropIndex + 1, 0, this.dragItem);
+                            }
+                        }
+                        if (insertType === "exchange") {
+                            list.splice(dropIndex, 1, this.dragItem);
+                            list.splice(dragIndex, 1, this.dropItem);
+                        }
                     }
                 }
             }
